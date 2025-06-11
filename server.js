@@ -1,20 +1,22 @@
+import dotenv from 'dotenv';
+dotenv.config();
 import mongoose from "mongoose";
 import express from "express";
 import multer from "multer";
 import path from "path"
 
 const app = express();
-const port = 3000;
+const port = process.env.PORT;
 
 import { v2 as cloudinary } from 'cloudinary';
 
 cloudinary.config({ 
-    cloud_name: 'dihcbkjsy', 
-    api_key: '646517389747394', 
-    api_secret: 'VRvC7YpL1iQuHa45CNDmfh8ZjEY'
+    cloud_name: process.env.CLOUD_NAME, 
+    api_key: process.env.API_KEY, 
+    api_secret: process.env.API_SECRET
 });
 
-mongoose.connect("mongodb+srv://vaishnavijaiswal707:H6xqthrkBP64IjMh@cluster0.zgxms7k.mongodb.net/", {
+mongoose.connect(process.env.MONGO_URL, {
     dbName: "Image_Uploader"
 }).then(()=>console.log("MongoDB connected")).catch((err) => console.log(err));
 
